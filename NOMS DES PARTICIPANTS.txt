@@ -1,0 +1,5 @@
+Ce projet etais realise par:
+	Manal JDER : digramme de class
+	Youssef BAIDOUNE : figma
+	Abderrahman JENNATI : digramme de sequence
+	Yassine SEFRIOUI: merise, digarme use case

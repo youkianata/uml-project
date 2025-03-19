@@ -1,0 +1,58 @@
+@startuml
+actor Utilisateur
+actor Administrateur
+
+participant "Système" as System
+participant "Base de données" as DB
+
+== Inscription ==
+Utilisateur -> System: sInscrire(nom, email, motDePasse)
+System -> DB: Vérifier si email existe
+DB --> System: Résultat
+System -> DB: Enregistrer utilisateur
+System --> Utilisateur: Confirmation inscription
+
+== Connexion ==
+Utilisateur -> System: seConnecter(email, motDePasse)
+System -> DB: Vérifier identifiants
+DB --> System: Succès/Échec
+System --> Utilisateur: Authentification réussie/échec
+
+== Gestion de Profil ==
+Utilisateur -> System: gererProfil(nom, email)
+System -> DB: Mettre à jour profil
+DB --> System: Confirmation mise à jour
+System --> Utilisateur: Profil mis à jour
+
+== Ajout de Livre ==
+Administrateur -> System: ajouterLivre(titre, auteur, genre)
+System -> DB: Enregistrer livre
+DB --> System: Confirmation ajout
+System --> Administrateur: Livre ajouté
+
+== Suppression de Livre ==
+Administrateur -> System: supprimerLivre(idLivre)
+System -> DB: Supprimer livre
+DB --> System: Confirmation suppression
+System --> Administrateur: Livre supprimé
+
+== Emprunt de Livre ==
+Utilisateur -> System: emprunterLivre(idLivre)
+System -> DB: Vérifier disponibilité
+DB --> System: Disponible/Indisponible
+System -> DB: Mettre à jour statut livre
+System --> Utilisateur: Confirmation emprunt
+
+== Retour de Livre ==
+Utilisateur -> System: retournerLivre(idLivre)
+System -> DB: Mettre à jour statut livre
+DB --> System: Confirmation retour
+System --> Utilisateur: Livre retourné
+
+== Laisser avis ==
+Utilisateur -> System: ajouterAvis(idUtilisateur, idLivre, note, commentaire)
+System ->DB: Ajout du commentaire
+DB --> System: Confirmation de l'ajout
+System --> Utilisateur: Confirmation de l'ajout
+
+@enduml
